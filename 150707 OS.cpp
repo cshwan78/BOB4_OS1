@@ -1,6 +1,5 @@
 // 150707 OS.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
 //
-
 #include "stdafx.h"
 #include "windows.h"
 #include "Strsafe.h"
@@ -201,9 +200,13 @@ bool create_bob_txt()
 	// 파일 닫기
 	CloseHandle(file_handle);
 
-	
+	//bob.txt파일을 현재디렉토리\bob2.txt 복사
 	CopyFileW( file_name, file_name2 , false);
 	
+
+
+
+
 	HANDLE file_handle2 = CreateFileW(
 		file_name2,
 		GENERIC_READ,
@@ -220,6 +223,9 @@ bool create_bob_txt()
 
 
 
+
+
+	//---- ReadFile() api 를 통해서 파일 읽기
 	char readed_buf[2048];
 	WCHAR Wbuf[1024];
 	DWORD dwRead;
@@ -228,12 +234,12 @@ bool create_bob_txt()
 	
 	MultiByteToWideChar(CP_UTF8, 0, readed_buf, dwRead, Wbuf, 1024);
 	WideCharToMultiByte(CP_ACP, 0, Wbuf, 1024, readed_buf, 2048, 0, 0);
-		
 	printf("%s", readed_buf);
 	CloseHandle(file_handle2);
-	//DeleteFileW(file_name);
 
-	//Read via mapped io
+
+
+	//---- Memory Mapped I/O 를 이용해서 파일 읽기
 	file_handle2 = CreateFileW(
 		file_name2,
 		GENERIC_READ,
@@ -279,11 +285,9 @@ bool create_bob_txt()
 	printf("%s", fileviewbuf);
 
 
-
+	// 현재디렉토리\bob.txt, 현재디렉토리\bob2.txt  모두삭제
 	DeleteFile(file_name);
 	DeleteFile(file_name2);
-
-
 	return true;
 }
 
