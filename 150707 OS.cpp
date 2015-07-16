@@ -1,4 +1,4 @@
-// 150707 OS.cpp : ÄÜ¼Ö ÀÀ¿ë ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÁøÀÔÁ¡À» Á¤ÀÇÇÕ´Ï´Ù.
+// 150707 OS.cpp : ì½˜ì†” ì‘ìš© í”„ë¡œê·¸ë¨ì— ëŒ€í•œ ì§„ì…ì ì„ ì •ì˜í•©ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -51,7 +51,7 @@ void print(_In_ const char* fmt, _In_ ...)
 **/
 bool create_bob_txt()
 {
-	// current directory ¸¦ ±¸ÇÑ´Ù.
+	// current directory ë¥¼ êµ¬í•œë‹¤.
 	wchar_t *buf = NULL;
 	uint32_t buflen = 0;
 	buflen = GetCurrentDirectoryW(buflen, buf);
@@ -69,7 +69,7 @@ bool create_bob_txt()
 		return false;
 	}
 
-	// current dir \\ bob.txt ÆÄÀÏ¸í »ı¼º
+	// current dir \\ bob.txt íŒŒì¼ëª… ìƒì„±
 	wchar_t file_name[260];
 	wchar_t file_name2[260];
 	if (!SUCCEEDED(StringCbPrintfW(
@@ -99,7 +99,7 @@ bool create_bob_txt()
 		::DeleteFileW(file_name);
 	}
 */
-	// ÆÄÀÏ »ı¼º
+	// íŒŒì¼ ìƒì„±
 	HANDLE file_handle = CreateFileW(
 		file_name,
 		GENERIC_WRITE,
@@ -114,7 +114,7 @@ bool create_bob_txt()
 		return false;
 	}
 
-	// ÆÄÀÏ¿¡ µ¥ÀÌÅÍ ¾²±â
+	// íŒŒì¼ì— ë°ì´í„° ì“°ê¸°
 	DWORD bytes_written = 0;
 	WCHAR string_buf[1024];
 	char utfbuf[2048];
@@ -122,7 +122,7 @@ bool create_bob_txt()
 	if (!SUCCEEDED(StringCbPrintfW(
 		string_buf,
 		sizeof(string_buf),
-		L"µ¿ÇØ¹°°ú ¹éµÎ»êÀÌ ¸¶¸£°í ´âµµ·Ï ÇÏ´À´ÔÀÌ º¸¿ìÇÏ»ç ¿ì¸®³ª¶ó¸¸¼¼\n")))
+		L"ë™í•´ë¬¼ê³¼ ë°±ë‘ì‚°ì´ ë§ˆë¥´ê³  ë‹³ë„ë¡ í•˜ëŠë‹˜ì´ ë³´ìš°í•˜ì‚¬ ìš°ë¦¬ë‚˜ë¼ë§Œì„¸\n")))
 	{
 		print("err, can not create data to write.");
 		CloseHandle(file_handle);
@@ -138,7 +138,7 @@ bool create_bob_txt()
 		return false;
 	}
 
-	// ¿µ¾î·Î ¾²±â
+	// ì˜ì–´ë¡œ ì“°ê¸°
 	if (!SUCCEEDED(StringCbPrintfW(
 		string_buf,
 		sizeof(string_buf),
@@ -162,7 +162,7 @@ bool create_bob_txt()
 	if (!SUCCEEDED(StringCbPrintfW(
 		string_bufa,
 		sizeof(string_bufa),
-		L"µ¿ÇØ¹°°ú ¹éµÎ»êÀÌ ¸¶¸£°í ´âµµ·Ï ÇÏ´À´ÔÀÌ º¸¿ìÇÏ»ç ¿ì¸®³ª¶ó¸¸¼¼\n")))
+		L"ë™í•´ë¬¼ê³¼ ë°±ë‘ì‚°ì´ ë§ˆë¥´ê³  ë‹³ë„ë¡ í•˜ëŠë‹˜ì´ ë³´ìš°í•˜ì‚¬ ìš°ë¦¬ë‚˜ë¼ë§Œì„¸\n")))
 	{
 		print("err, can not create data to write.");
 		CloseHandle(file_handle);
@@ -179,7 +179,7 @@ bool create_bob_txt()
 	}
 
 	
-	// ¿µ¾î·Î ¾²±â
+	// ì˜ì–´ë¡œ ì“°ê¸°
 	if (!SUCCEEDED(StringCbPrintfW(
 		string_bufa,
 		sizeof(string_bufa),
@@ -198,7 +198,7 @@ bool create_bob_txt()
 		CloseHandle(file_handle);
 		return false;
 	}
-	// ÆÄÀÏ ´İ±â
+	// íŒŒì¼ ë‹«ê¸°
 	CloseHandle(file_handle);
 
 	
